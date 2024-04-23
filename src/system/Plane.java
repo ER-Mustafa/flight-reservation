@@ -4,6 +4,7 @@ import enums.PlaneModel;
 import enums.PlaneType;
 
 public class Plane {
+    // Plane is not a model. It is an entity.
     private static int idCounter = 0;
     private final int id;
     private PlaneType type;
