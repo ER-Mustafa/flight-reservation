@@ -1,6 +1,8 @@
 package system;
 
-public class Ticket {
+import interfaces.Printable;
+
+public class Ticket implements Printable {
     private static int idCounter = 0;
     private int id;
     private int reservationId;
@@ -21,5 +23,9 @@ public class Ticket {
 
     public void setReservationId(int reservationId) {
         this.reservationId = reservationId;
+    }
+
+    public void print() {
+        System.out.println(id + " " + reservationId);
     }
 }

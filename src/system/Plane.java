@@ -3,6 +3,8 @@ package system;
 import enums.PlaneModel;
 import enums.PlaneType;
 
+import java.util.ArrayList;
+
 public class Plane {
     // Plane is not a model. It is an entity.
     private static int idCounter = 0;
@@ -10,6 +12,7 @@ public class Plane {
     private PlaneType type;
     private int capacity;
     private PlaneModel model;
+    private static final ArrayList<Plane> planes = new ArrayList<>();
 
     public Plane(PlaneType type, int capacity, PlaneModel model) {
         Plane.idCounter++;
@@ -17,6 +20,7 @@ public class Plane {
         this.type = type;
         this.capacity = capacity;
         this.model = model;
+        Plane.planes.add(this);
     }
 
     public int getId() {

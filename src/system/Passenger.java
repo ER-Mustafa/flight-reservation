@@ -2,7 +2,7 @@ package system;
 
 public class Passenger extends Client {
     private static int idCounter = 0;
-    private int id;
+    private final int id;
 
     public Passenger(String name, int age, String surname,
                      String nationality, String gender, String nationalId ) {
