@@ -137,6 +137,15 @@ public class Tariff {
         return;
     }
 
+    public static Tariff getTariff(int id) {
+        for (Tariff tariff : tariffs) {
+            if (tariff.getId() == id) {
+                return tariff;
+            }
+        }
+            return null;
+    }
+
     public static ArrayList<Tariff> getTariffs() {
         return tariffs;
     }

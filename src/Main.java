@@ -2,7 +2,10 @@ import enums.AirlineCompany;
 import enums.AirportCode;
 import enums.PlaneModel;
 import enums.PlaneType;
+import system.Flight;
+import system.Plane;
 import system.Tariff;
+import system.TariffHandler;
 
 import java.util.Scanner;
 
@@ -10,9 +13,9 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
+        TariffHandler tariffHandler = new TariffHandler();
 
-        // Create planes.
-
+        Plane airbus = new Plane(PlaneType.NARROW_BODY, 65, PlaneModel.AIRBUS_A320);
         int[] everyDay = {1, 1, 1, 1, 1, 1, 1};
         Tariff tariff = new Tariff(
                 PlaneType.NARROW_BODY,
@@ -27,8 +30,10 @@ public class Main {
                 "07/05/2024"
                 );
 
-        // Create flights.
+        tariffHandler.handleNewTariff(tariff.getId());
 
-        // Take reservations with a handler.
+        for (Flight flight : Flight.getFlights()) {
+            flight.print();
+        }
     }
 }

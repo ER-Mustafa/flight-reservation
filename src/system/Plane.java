@@ -12,6 +12,7 @@ public class Plane {
     private PlaneType type;
     private int capacity;
     private PlaneModel model;
+    private static final ArrayList<String> busyDays = new ArrayList<>();
     private static final ArrayList<Plane> planes = new ArrayList<>();
 
     public Plane(PlaneType type, int capacity, PlaneModel model) {
@@ -49,5 +50,32 @@ public class Plane {
 
     public void setModel(PlaneModel model) {
         this.model = model;
+    }
+
+    public static ArrayList<Plane> getPlanes() {
+        return planes;
+    }
+
+    public static int getPlaneForDate(String date, PlaneType type, PlaneModel model) {
+        for (Plane plane: planes) {
+            if (!plane.checkIfBusy(date) && plane.getType() == type && plane.getModel() == model) {
+                plane.addBusyDay(date);
+                return plane.getId();
+            }
+        }
+        return -1;
+    }
+
+    public boolean checkIfBusy(String date) {
+        for (String day: busyDays) {
+            if (day.equals(date)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addBusyDay(String date) {
+        busyDays.add(date);
     }
 }

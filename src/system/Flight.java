@@ -1,19 +1,26 @@
 package system;
 
+import enums.AirlineCompany;
+import interfaces.Printable;
+
 import java.util.ArrayList;
 
-public class Flight {
+public class Flight implements Printable {
     private static int idCounter = 0;
     private final int id;
     private int tariffId;
     private String flightDate;
+    private int planeId;
+    private AirlineCompany airlineCompany;
     private static final ArrayList<Flight> flights = new ArrayList<>();
 
-    public Flight(int tariffId, String flightDate) {
+    public Flight(int tariffId, String flightDate, int planeId, AirlineCompany airlineCompany) {
         this.id = idCounter++;
         this.tariffId = tariffId;
         this.flightDate = flightDate;
-        Flight.flights.add(this);
+        this.planeId = planeId;
+        this.airlineCompany = airlineCompany;
+        Flight.getFlights().add(this);
     }
 
     public int getId() {
@@ -28,7 +35,15 @@ public class Flight {
         return flightDate;
     }
 
+    public int getPlaneId() {
+        return planeId;
+    }
+
     public static ArrayList<Flight> getFlights() {
         return flights;
+    }
+
+    public void print() {
+        System.out.printf("*************\nFlight number: %d by %s\nDate: %s, Plane Number: %d, Tariff ID: %d\n*************\n", id, airlineCompany, flightDate, planeId, tariffId);
     }
 }
