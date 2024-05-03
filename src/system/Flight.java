@@ -12,6 +12,7 @@ public class Flight implements Printable {
     private String flightDate;
     private int planeId;
     private AirlineCompany airlineCompany;
+    private int seatSold;
     private static final ArrayList<Flight> flights = new ArrayList<>();
 
     public Flight(int tariffId, String flightDate, int planeId, AirlineCompany airlineCompany) {
@@ -20,6 +21,7 @@ public class Flight implements Printable {
         this.flightDate = flightDate;
         this.planeId = planeId;
         this.airlineCompany = airlineCompany;
+        this.seatSold = 0;
         Flight.getFlights().add(this);
     }
 
@@ -43,7 +45,20 @@ public class Flight implements Printable {
         return flights;
     }
 
+    public void incrementSeatSold() {
+        seatSold++;
+    }
+
+    public static void printFlightsByDate(String date) {
+        for (Flight flight : flights) {
+            if (flight.flightDate.equals(date)) {
+              flight.print();
+            }
+        }
+    }
+
     public void print() {
-        System.out.printf("*************\nFlight number: %d by %s\nDate: %s, Plane Number: %d, Tariff ID: %d\n*************\n", id, airlineCompany, flightDate, planeId, tariffId);
+        System.out.printf("*************\nFlight number: %d by %s\nDate: %s, Plane Number: %d, Tariff ID: %d\n*************\n",
+                id, airlineCompany, flightDate, planeId, tariffId);
     }
 }

@@ -1,4 +1,8 @@
-package system;
+package handlers;
+
+import system.Flight;
+import system.Plane;
+import system.Tariff;
 
 import java.text.SimpleDateFormat;
 import java.util.*;

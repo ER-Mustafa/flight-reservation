@@ -2,12 +2,11 @@ import enums.AirlineCompany;
 import enums.AirportCode;
 import enums.PlaneModel;
 import enums.PlaneType;
+import handlers.TerminalHandler;
 import system.Flight;
 import system.Plane;
 import system.Tariff;
-import system.TariffHandler;
-
-import java.util.Scanner;
+import handlers.TariffHandler;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -35,5 +34,9 @@ public class Main {
         for (Flight flight : Flight.getFlights()) {
             flight.print();
         }
+
+        Runnable TerminalHandler = new TerminalHandler();
+        Thread thread = new Thread(TerminalHandler);
+        thread.start();
     }
 }
