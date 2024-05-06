@@ -2,7 +2,7 @@
 
 - query by date:
 </br>
-`qd <DD/MM/YYYY>`
+`qd DD/MM/YYYY`
 </br>
 </br>
 - create user:
