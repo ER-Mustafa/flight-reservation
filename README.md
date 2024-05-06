@@ -12,17 +12,17 @@
 </br>
 - make reservation:
 </br>
-`mr <flightNo> <passengerId>`
+`mr flightNo passengerId`
 </br>
 </br>
 - ask availability: 
 </br>
-`avs <flightNo>`
+`avs flightNo`
 </br>
 </br>
 - show reservations of passenger: 
 </br>
-`srop <passengerId>`
+`srop passengerId`
 </br>
 </br>
 - show clients:
