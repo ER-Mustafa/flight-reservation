@@ -1,26 +1,32 @@
 ### COMMANDS:
 
 - query by date:
-  - `qd <DD/MM/YYYY>`
+</br>
+`qd <DD/MM/YYYY>`
 </br>
 </br>
 - create user:
-  - `cu`
+</br> 
+`cu`
 </br>
 </br>
 - make reservation:
-  - `mr <flightNo> <passengerId>`
+</br>
+`mr <flightNo> <passengerId>`
 </br>
 </br>
-- ask availability:
-  - `avs <flightNo>`
+- ask availability: 
+</br>
+`avs <flightNo>`
 </br>
 </br>
-- show reservations of passenger:
-  - `srop <passengerId>`
+- show reservations of passenger: 
+</br>
+`srop <passengerId>`
 </br>
 </br>
 - show clients:
-  - `sc`
+</br>
+`sc`
 </br>
 </br>
