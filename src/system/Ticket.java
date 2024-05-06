@@ -2,15 +2,19 @@ package system;
 
 import interfaces.Printable;
 
+import java.util.ArrayList;
+
 public class Ticket implements Printable {
     private static int idCounter = 0;
     private int id;
     private int reservationId;
+    private static final ArrayList<Ticket> tickets = new ArrayList<>();
 
     public Ticket(int reservationId) {
         idCounter++;
         this.id = idCounter;
         this.reservationId = reservationId;
+        Ticket.tickets.add(this);
     }
 
     public int getId() {
@@ -26,6 +30,6 @@ public class Ticket implements Printable {
     }
 
     public void print() {
-        System.out.println(id + " " + reservationId);
+        System.out.println("-- Ticket id: " + id);
     }
 }

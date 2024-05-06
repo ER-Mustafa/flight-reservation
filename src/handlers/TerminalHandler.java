@@ -2,23 +2,13 @@ package handlers;
 
 import system.Flight;
 import system.Passenger;
+import system.Reservation;
+import system.Ticket;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TerminalHandler implements Runnable {
-    /*
-    * HANDBOOK
-    * COMMANDS:
-    *
-    * exit
-    * query date: queries flights on this date --- date format DD/MM/YYYY
-    * create-user
-    * book flightNumber for passengerId
-    * capacity flightNumber
-    * show-reservations passengerId
-    * show-ticket passengerId
-    *
-    * */
 
     @Override
     public void run() {
@@ -32,12 +22,14 @@ public class TerminalHandler implements Runnable {
                 break;
             }
 
-            if (elements[0].equals("query")) {
+            // query by date
+            if (elements[0].equals("qd")) { // ::qd <DD/MM/YYYY>
                 String date = elements[1];
                 Flight.printFlightsByDate(date);
             }
 
-            if (elements[0].equals("create-user")) {
+            // create user
+            if (elements[0].equals("cu")) { // ::cu
                 System.out.println("Enter name,age,surname,nationality, gender, nationalId");
                 System.out.print("-> ");
                 String information = scanner.nextLine();
@@ -52,6 +44,46 @@ public class TerminalHandler implements Runnable {
 
                 Passenger newPassenger = new Passenger(name, age, surname, nationality, gender, nationalId);
                 System.out.println("Passenger created successfully!");
+            }
+
+            // make reservation
+            if (elements[0].equals("mr")) {  // ::mr <flightNo> <passengerId>
+                int flightNumber = Integer.parseInt(elements[1]);
+                int passengerId = Integer.parseInt(elements[2]);
+                if (Flight.getAvailableSeatForFlight(flightNumber) == 0) {
+                    System.out.println("Cannot make reservations to this flight. No empty seats.");
+                } else {
+                    Reservation newReservation = new Reservation(passengerId, flightNumber);
+                    Ticket newTicket = new Ticket(newReservation.getId());
+                    Flight.sellTicketForFlight(flightNumber);
+                    System.out.println("Reservation created successfully! Your ticket number: " + newTicket.getId());
+                }
+            }
+
+            // ask-availability
+            if (elements[0].equals("avs")) { // ::avs <flightNo>
+                int flightNumber = Integer.parseInt(elements[1]);
+                int seatAvailable = Flight.getAvailableSeatForFlight(flightNumber);
+                System.out.println("Seat available: " + seatAvailable);
+            }
+
+            // show reservations of passenger
+            if (elements[0].equals("srop")) { // ::srop <passengerId>
+                int passengerId = Integer.parseInt(elements[1]);
+                ArrayList<Reservation> reservations = Reservation.getReservationsByPassengerId(passengerId);
+                if (reservations.isEmpty()) {
+                    System.out.println("No reservations found for passenger: " + passengerId);
+                }
+                for (Reservation reservation : reservations) {
+                    reservation.print();
+                }
+            }
+
+            // show clients
+            if (elements[0].equals("sc")) { // ::sc
+                for (Passenger passenger: Passenger.getPassengers()) {
+                    passenger.print();
+                }
             }
         }
     }

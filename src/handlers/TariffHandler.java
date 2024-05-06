@@ -29,7 +29,7 @@ public class TariffHandler {
             for (String date : dateArray) {
                 int planeId = Plane.getPlaneForDate(date, tariff.getPlaneType(), tariff.getPlaneModel());
                 if (planeId == -1) {
-                    System.err.printf("For the date: %s and the tariff id: %d , there is no available plane", date, tariffId);
+                    System.err.printf("For the date: %s and the tariff id: %d , there is no available plane\n", date, tariffId);
                 } else {
                     Flight newFlight = new Flight(tariffId, date, planeId, tariff.getAirlineCompany());
                 }

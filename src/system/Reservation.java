@@ -1,8 +1,10 @@
 package system;
 
+import interfaces.Printable;
+
 import java.util.ArrayList;
 
-public class Reservation {
+public class Reservation implements Printable {
     private static int idCounter = 0;
     private final int id;
     private int passengerId;
@@ -40,4 +42,19 @@ public class Reservation {
     public static ArrayList<Reservation> getReservations() {
         return reservations;
     }
+
+    public static ArrayList<Reservation> getReservationsByPassengerId(int passengerId) {
+        ArrayList<Reservation> result = new ArrayList<Reservation>();
+        for (Reservation reservation : reservations) {
+            if (reservation.getPassengerId() == passengerId) {
+                result.add(reservation);
+            }
+        }
+        return result;
+    }
+
+    public void print() {
+        System.out.println("Passenger ID: " + passengerId + " Flight ID: " + flightId);
+    }
+
 }

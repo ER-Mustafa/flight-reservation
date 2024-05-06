@@ -49,6 +49,31 @@ public class Flight implements Printable {
         seatSold++;
     }
 
+    public static void sellTicketForFlight(int flightNumber) {
+        for (Flight flight : Flight.getFlights()) {
+            if (flight.getPlaneId() == flight.getPlaneId()) {
+                flight.incrementSeatSold();
+            }
+        }
+    }
+
+    public int getAvailableSeats() {
+        Plane plane = Plane.getPlane(planeId);
+        if (plane == null) {
+            return 0;
+        }
+        return plane.getCapacity() - seatSold;
+    }
+
+    public static int getAvailableSeatForFlight(int flightNo) {
+        for (Flight flight : flights) {
+            if (flight.getId() == flightNo) {
+                return flight.getAvailableSeats();
+            }
+        }
+        return 0;
+    }
+
     public static void printFlightsByDate(String date) {
         for (Flight flight : flights) {
             if (flight.flightDate.equals(date)) {

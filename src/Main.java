@@ -3,9 +3,7 @@ import enums.AirportCode;
 import enums.PlaneModel;
 import enums.PlaneType;
 import handlers.TerminalHandler;
-import system.Flight;
-import system.Plane;
-import system.Tariff;
+import system.*;
 import handlers.TariffHandler;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -14,9 +12,14 @@ public class Main {
     public static void main(String[] args) {
         TariffHandler tariffHandler = new TariffHandler();
 
-        Plane airbus = new Plane(PlaneType.NARROW_BODY, 65, PlaneModel.AIRBUS_A320);
         int[] everyDay = {1, 1, 1, 1, 1, 1, 1};
-        Tariff tariff = new Tariff(
+
+        Plane airbus1 = new Plane(PlaneType.NARROW_BODY, 65, PlaneModel.AIRBUS_A320);
+        Plane airbus2 = new Plane(PlaneType.NARROW_BODY, 65, PlaneModel.AIRBUS_A320);
+        Plane boeing1 = new Plane(PlaneType.WIDE_BODY, 300, PlaneModel.BOEING_737);
+
+
+        Tariff tariff1 = new Tariff(
                 PlaneType.NARROW_BODY,
                 PlaneModel.AIRBUS_A320,
                 AirportCode.ADB,
@@ -25,15 +28,86 @@ public class Main {
                 "13:20",
                 everyDay,
                 AirlineCompany.TK,
-                "03/05/2024",
-                "07/05/2024"
+                "01/01/2024",
+                "15/12/2024"
                 );
 
-        tariffHandler.handleNewTariff(tariff.getId());
+        Tariff tariff2 = new Tariff(
+                PlaneType.NARROW_BODY,
+                PlaneModel.AIRBUS_A320,
+                AirportCode.BER,
+                AirportCode.SAW,
+                "17:00",
+                "19:30",
+                everyDay,
+                AirlineCompany.TK,
+                "01/01/2024",
+                "15/12/2024"
+        );
 
-        for (Flight flight : Flight.getFlights()) {
-            flight.print();
-        }
+        Tariff tariff3 = new Tariff(
+                PlaneType.WIDE_BODY,
+                PlaneModel.BOEING_737,
+                AirportCode.BER,
+                AirportCode.IST,
+                "10:00",
+                "13:00",
+                everyDay,
+                AirlineCompany.PC,
+                "01/01/2024",
+                "15/12/2024"
+        );
+
+        tariffHandler.handleNewTariff(tariff1.getId());
+        tariffHandler.handleNewTariff(tariff2.getId());
+        tariffHandler.handleNewTariff(tariff3.getId());
+
+        // CREATE PASSENGERS
+
+        Passenger pass1 = new Passenger(
+                "Görkem",
+                22,
+                "Varış",
+                "Turko",
+                "M",
+                "12342536475"
+        );
+
+        Passenger pass2 = new Passenger(
+                "Mustafa",
+                32,
+                "Er",
+                "Turko",
+                "M",
+                "1234253622"
+        );
+
+        Passenger pass3 = new Passenger(
+                "Enes Can",
+                42,
+                "Ulutaş",
+                "Turko",
+                "M",
+                "1234253622"
+        );
+
+        Passenger pass4 = new Passenger(
+                "Bahadır",
+                31,
+                "Çelik",
+                "Turko",
+                "M",
+                "123413513622"
+        );
+
+        Passenger pass5 = new Passenger(
+                "Samet",
+                322,
+                "Biber",
+                "Turko",
+                "M",
+                "12232323122"
+        );
 
         Runnable TerminalHandler = new TerminalHandler();
         Thread thread = new Thread(TerminalHandler);
