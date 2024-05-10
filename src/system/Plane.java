@@ -4,6 +4,7 @@ import enums.PlaneModel;
 import enums.PlaneType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Plane {
     // Plane is not a model. It is an entity.
@@ -14,6 +15,7 @@ public class Plane {
     private PlaneModel model;
     private final ArrayList<String> busyDays = new ArrayList<>();
     private static final ArrayList<Plane> planes = new ArrayList<>();
+    private static final HashMap<Integer, Plane> planeMap = new HashMap<>();
 
     public Plane(PlaneType type, int capacity, PlaneModel model) {
         Plane.idCounter++;
@@ -22,6 +24,7 @@ public class Plane {
         this.capacity = capacity;
         this.model = model;
         Plane.planes.add(this);
+        Plane.planeMap.put(this.id, this);
     }
 
     public int getId() {
@@ -57,12 +60,7 @@ public class Plane {
     }
 
     public static Plane getPlane(int id) {
-        for (Plane plane : planes) {
-            if (plane.getId() == id) {
-                return plane;
-            }
-        }
-        return null;
+        return planeMap.get(id);
     }
 
     public static int getPlaneForDate(String date, PlaneType type, PlaneModel model) {

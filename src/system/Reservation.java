@@ -3,6 +3,7 @@ package system;
 import interfaces.Printable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Reservation implements Printable {
     private static int idCounter = 0;
@@ -10,6 +11,7 @@ public class Reservation implements Printable {
     private int passengerId;
     private int flightId;
     private static final ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+    private static final HashMap<Integer, Reservation> reservationMap = new HashMap<>();
 
     public Reservation(int passengerId, int flightId) {
         idCounter++;
@@ -17,6 +19,7 @@ public class Reservation implements Printable {
         this.passengerId = passengerId;
         this.flightId = flightId;
         reservations.add(this);
+        reservationMap.put(id, this);
     }
 
     public int getId() {
@@ -51,6 +54,10 @@ public class Reservation implements Printable {
             }
         }
         return result;
+    }
+
+    public static Reservation getReservation(int id) {
+        return reservationMap.get(id);
     }
 
     public void print() {

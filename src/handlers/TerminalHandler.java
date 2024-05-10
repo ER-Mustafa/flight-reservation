@@ -1,5 +1,6 @@
 package handlers;
 
+import enums.AirportCode;
 import system.Flight;
 import system.Passenger;
 import system.Reservation;
@@ -84,6 +85,15 @@ public class TerminalHandler implements Runnable {
                 for (Passenger passenger: Passenger.getPassengers()) {
                     passenger.print();
                 }
+            }
+
+            // query by origin and destination
+            if (elements[0].equals("q")) { // ::qod originCode destinationCode
+                AirportCode origin = AirportCode.valueOf(elements[1]);
+                AirportCode destination = AirportCode.valueOf(elements[2]);
+                String startDate = elements[3];
+                String endDate = elements[4];
+                Flight.printFlightsByQuery(origin, destination, startDate, endDate);
             }
         }
     }

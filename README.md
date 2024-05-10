@@ -22,3 +22,7 @@
 
 - show clients:
 `sc`
+
+
+- full query:
+`q origin destination startDate endDate`

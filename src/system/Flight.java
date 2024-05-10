@@ -1,9 +1,13 @@
 package system;
 
 import enums.AirlineCompany;
+import enums.AirportCode;
 import interfaces.Printable;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 public class Flight implements Printable {
     private static int idCounter = 0;
@@ -14,6 +18,7 @@ public class Flight implements Printable {
     private AirlineCompany airlineCompany;
     private int seatSold;
     private static final ArrayList<Flight> flights = new ArrayList<>();
+    private static final HashMap<Integer, Flight> flightMap = new HashMap<>();
 
     public Flight(int tariffId, String flightDate, int planeId, AirlineCompany airlineCompany) {
         this.id = idCounter++;
@@ -50,11 +55,15 @@ public class Flight implements Printable {
     }
 
     public static void sellTicketForFlight(int flightNumber) {
-        for (Flight flight : Flight.getFlights()) {
-            if (flight.getPlaneId() == flight.getPlaneId()) {
-                flight.incrementSeatSold();
-            }
+        Flight wantedFlight = flightMap.get(flightNumber);
+        if (wantedFlight == null) {
+            return;
         }
+        wantedFlight.incrementSeatSold();
+    }
+
+    public static Flight getFlight(int flightNumber) {
+        return flightMap.get(flightNumber);
     }
 
     public int getAvailableSeats() {
@@ -66,12 +75,11 @@ public class Flight implements Printable {
     }
 
     public static int getAvailableSeatForFlight(int flightNo) {
-        for (Flight flight : flights) {
-            if (flight.getId() == flightNo) {
-                return flight.getAvailableSeats();
-            }
+        Flight flight = Flight.getFlight(flightNo);
+        if (flight == null) {
+            return 0;
         }
-        return 0;
+        return flight.getAvailableSeats();
     }
 
     public static void printFlightsByDate(String date) {
@@ -79,6 +87,29 @@ public class Flight implements Printable {
             if (flight.flightDate.equals(date)) {
               flight.print();
             }
+        }
+    }
+
+    public static void printFlightsByQuery(AirportCode origin, AirportCode destination, String start, String end) {
+        Date startDate = stringToDate(start);
+        Date endDate = stringToDate(end);
+        for (Flight flight: flights) {
+            Tariff tariff = Tariff.getTariff(flight.getTariffId());
+            Date flightD = stringToDate(flight.getFlightDate());
+            boolean timeCondition = flightD.compareTo(startDate) >= 0 && flightD.compareTo(endDate) <= 0;
+            boolean airportCondition = tariff.getOrigin() == origin && tariff.getDestination() == destination;
+            if (timeCondition && airportCondition) {
+                flight.print();
+            }
+        }
+    }
+
+    private static Date stringToDate(String date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            return formatter.parse(date);
+        } catch (Exception e) {
+            return null;
         }
     }
 

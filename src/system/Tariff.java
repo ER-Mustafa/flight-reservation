@@ -6,6 +6,8 @@ import enums.PlaneModel;
 import enums.PlaneType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Tariff {
     private static int idCounter = 0;
@@ -21,6 +23,7 @@ public class Tariff {
     private String periodStart;
     private String periodEnd;
     private static final ArrayList<Tariff> tariffs = new ArrayList<>();
+    private static final Map<Integer, Tariff> tariffMap = new HashMap<>();
 
     public Tariff(PlaneType planeType,
                   PlaneModel planeModel,
@@ -46,6 +49,7 @@ public class Tariff {
         this.periodStart = periodStart;
         this.periodEnd = periodEnd;
         Tariff.tariffs.add(this);
+        tariffMap.put(this.id, this);
     }
 
     public int getId() {
@@ -138,12 +142,7 @@ public class Tariff {
     }
 
     public static Tariff getTariff(int id) {
-        for (Tariff tariff : tariffs) {
-            if (tariff.getId() == id) {
-                return tariff;
-            }
-        }
-            return null;
+        return tariffMap.get(id);
     }
 
     public static ArrayList<Tariff> getTariffs() {
