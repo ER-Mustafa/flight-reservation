@@ -65,10 +65,10 @@ public class Main {
         // CREATE PASSENGERS
 
         Passenger pass1 = new Passenger(
-                "Görkem",
+                "Gorkem",
                 22,
-                "Varış",
-                "Turko",
+                "Varis",
+                "Turk",
                 "M",
                 "12342536475"
         );
@@ -77,7 +77,7 @@ public class Main {
                 "Mustafa",
                 32,
                 "Er",
-                "Turko",
+                "Turk",
                 "M",
                 "1234253622"
         );
@@ -85,17 +85,17 @@ public class Main {
         Passenger pass3 = new Passenger(
                 "Enes Can",
                 42,
-                "Ulutaş",
-                "Turko",
+                "Ulutas",
+                "Turk",
                 "M",
                 "1234253622"
         );
 
         Passenger pass4 = new Passenger(
-                "Bahadır",
+                "Bahadir",
                 31,
-                "Çelik",
-                "Turko",
+                "Celik",
+                "Turk",
                 "M",
                 "123413513622"
         );
@@ -104,7 +104,7 @@ public class Main {
                 "Samet",
                 322,
                 "Biber",
-                "Turko",
+                "Turk",
                 "M",
                 "12232323122"
         );

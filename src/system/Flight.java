@@ -28,6 +28,7 @@ public class Flight implements Printable {
         this.airlineCompany = airlineCompany;
         this.seatSold = 0;
         Flight.getFlights().add(this);
+        flightMap.put(id, this);
     }
 
     public int getId() {
